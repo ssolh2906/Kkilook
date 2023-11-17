@@ -1,6 +1,7 @@
 package com.svkhackathon.kkilook.screen
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -11,6 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.svkhackathon.kkilook.KkilookApp
 import com.svkhackathon.kkilook.ui.theme.KkilookTheme
 
@@ -41,6 +43,6 @@ fun MainScreen(
 @Composable
 fun GreetingPreview() {
     KkilookTheme {
-        KkilookApp("Android")
+        KkilookApp("Android", PaddingValues(0.dp))
     }
 }
