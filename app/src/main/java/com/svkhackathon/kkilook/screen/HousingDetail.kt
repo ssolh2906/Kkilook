@@ -85,7 +85,7 @@ fun HousingDetailScreen() {
                 .aspectRatio(1f)
         ) {
             Image(
-                painter = painterResource(id = R.drawable.map),
+                painter = painterResource(id = R.drawable.map2),
                 contentDescription = "map",
                 modifier = Modifier.fillMaxSize()
             )

@@ -62,6 +62,7 @@ import com.svkhackathon.kkilook.screen.ROUTE_JOB_LIST
 import com.svkhackathon.kkilook.screen.ROUTE_MAIN
 import com.svkhackathon.kkilook.screen.ROUTE_MAP
 import com.svkhackathon.kkilook.screen.ROUTE_MARKET_LIST
+import com.svkhackathon.kkilook.ui.theme.Brown10
 import com.svkhackathon.kkilook.ui.theme.Brown40
 import com.svkhackathon.kkilook.ui.theme.Brown60
 import com.svkhackathon.kkilook.ui.theme.Brown80
@@ -148,7 +149,15 @@ private fun AppScreen() {
                                     modifier = Modifier.size(SwitchDefaults.IconSize),
                                 )
                             }
-                        }
+                        },
+                        colors = SwitchDefaults.colors(
+                            checkedThumbColor = Brown10,
+                            checkedTrackColor = Brown60,
+                            checkedBorderColor = Brown10,
+                            uncheckedThumbColor = Brown80,
+                            uncheckedTrackColor = Brown40,
+                            uncheckedIconColor = Color.Black
+                        )
                     )
                 },
                 modifier = Modifier.padding(horizontal = 4.dp)

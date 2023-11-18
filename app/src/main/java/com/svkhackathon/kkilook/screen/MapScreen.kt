@@ -54,7 +54,7 @@ fun MapScreen(page: String?) {
             coordinate.value = it
         }) {
         Image(
-            painter = painterResource(id = R.drawable.map),
+            painter = painterResource(id = R.drawable.map2),
             contentDescription = "map",
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
