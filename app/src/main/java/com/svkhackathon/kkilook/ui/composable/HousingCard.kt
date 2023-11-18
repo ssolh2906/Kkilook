@@ -45,9 +45,14 @@ fun HousingCard(
                 overflow = TextOverflow.Ellipsis
             )
             Spacer(modifier = Modifier.height(12.dp))
+            Text(text = "123 Ariana Grande Way, Los Gatos, CA", style = TextStyle.Default)
+            Spacer(modifier = Modifier.height(4.dp))
             Text(text = "1 Bed 1 Bath", style = TextStyle.Default)
             Spacer(modifier = Modifier.height(4.dp))
-            Text(text = "$1000 / night", style = TextStyle.Default)
+            Text(
+                text = "$1000 / night",
+                style = TextStyle.Default.copy(fontWeight = FontWeight.Bold, fontSize = 18.sp)
+            )
         }
     }
 }
