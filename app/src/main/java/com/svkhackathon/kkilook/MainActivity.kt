@@ -221,7 +221,6 @@ fun KkilookNavigation(
 
         composable("$ROUTE_ITEM_DETAIL/{id}") { navEntry ->
             ItemDetailScreen(
-                navController = navController,
                 id = navEntry.arguments?.getString("id")
             )
         }
