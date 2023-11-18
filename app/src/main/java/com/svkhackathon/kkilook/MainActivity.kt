@@ -7,8 +7,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Divider
@@ -23,11 +26,17 @@ import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -37,8 +46,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.svkhackathon.kkilook.screen.ItemDetailScreen
 import com.svkhackathon.kkilook.screen.MainScreen
+import com.svkhackathon.kkilook.screen.MapScreen
+import com.svkhackathon.kkilook.screen.MarketListScreen
 import com.svkhackathon.kkilook.screen.ROUTE_ITEM_DETAIL
 import com.svkhackathon.kkilook.screen.ROUTE_MAIN
+import com.svkhackathon.kkilook.screen.ROUTE_MAP
+import com.svkhackathon.kkilook.screen.ROUTE_MARKET_LIST
 import com.svkhackathon.kkilook.ui.theme.KkilookTheme
 import kotlinx.coroutines.launch
 
@@ -66,11 +79,14 @@ private fun AppScreen() {
 
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
+    val currentPage = remember { mutableStateOf(Page.Market) }
 
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = {},
+                title = {
+                    Text(text = currentPage.value.string)
+                },
                 navigationIcon = {
                     Icon(
                         Icons.Filled.Menu,
@@ -82,7 +98,46 @@ private fun AppScreen() {
                                 }
                             }
                         })
-                })
+                },
+                actions = {
+                    var checked by remember { mutableStateOf(true) }
+
+                    Switch(
+                        checked = checked,
+                        onCheckedChange = { isMap ->
+                            checked = isMap
+
+                            if (isMap) {
+                                navController.navigate(ROUTE_MAP)
+                            } else {
+                                when (currentPage.value) {
+                                    Page.Job -> navController.navigate(ROUTE_MAIN)
+                                    Page.Housing -> navController.navigate(ROUTE_MAIN)
+                                    Page.Market -> navController.navigate(ROUTE_MARKET_LIST)
+                                }
+                            }
+                        },
+                        thumbContent = if (checked) {
+                            {
+                                Icon(
+                                    imageVector = Icons.Filled.LocationOn,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(SwitchDefaults.IconSize),
+                                )
+                            }
+                        } else {
+                            {
+                                Icon(
+                                    imageVector = Icons.Filled.List,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(SwitchDefaults.IconSize),
+                                )
+                            }
+                        }
+                    )
+                },
+                modifier = Modifier.padding(horizontal = 4.dp)
+            )
         }
     ) {
         Surface(modifier = Modifier.padding(it)) {
@@ -97,10 +152,11 @@ private fun AppScreen() {
                         )
                         Divider()
                         NavigationDrawerItem(
-                            label = { Text(text = "팝니다 / 삽니다") },
+                            label = { Text(text = Page.Job.string) },
                             selected = false,
                             onClick = {
                                 navController.navigate(ROUTE_MAIN)
+                                currentPage.value = Page.Job
                                 scope.launch {
                                     drawerState.apply {
                                         close()
@@ -110,10 +166,11 @@ private fun AppScreen() {
                         )
 
                         NavigationDrawerItem(
-                            label = { Text(text = "메에?") },
+                            label = { Text(text = Page.Housing.string) },
                             selected = false,
                             onClick = {
                                 navController.navigate(ROUTE_MAIN)
+                                currentPage.value = Page.Housing
                                 scope.launch {
                                     drawerState.apply {
                                         close()
@@ -123,10 +180,11 @@ private fun AppScreen() {
                         )
 
                         NavigationDrawerItem(
-                            label = { Text(text = "끼룩끼룩") },
+                            label = { Text(text = Page.Market.string) },
                             selected = false,
                             onClick = {
-                                navController.navigate(ROUTE_MAIN)
+                                navController.navigate(ROUTE_MARKET_LIST)
+                                currentPage.value = Page.Market
                                 scope.launch {
                                     drawerState.apply {
                                         close()
@@ -167,5 +225,19 @@ fun KkilookNavigation(
                 id = navEntry.arguments?.getString("id")
             )
         }
+
+        composable("$ROUTE_MAP") {
+            MapScreen()
+        }
+
+        composable(ROUTE_MARKET_LIST) {
+            MarketListScreen()
+        }
     }
+}
+
+enum class Page(val string: String) {
+    Job("구인구직"),
+    Housing("렌트/하숙"),
+    Market("마켓")
 }
