@@ -42,11 +42,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.svkhackathon.kkilook.screen.HousingDetailScreen
 import com.svkhackathon.kkilook.screen.HousingListScreen
 import com.svkhackathon.kkilook.screen.ItemDetailScreen
 import com.svkhackathon.kkilook.screen.MainScreen
 import com.svkhackathon.kkilook.screen.MapScreen
 import com.svkhackathon.kkilook.screen.MarketListScreen
+import com.svkhackathon.kkilook.screen.ROUTE_HOUSING_DETAIL
 import com.svkhackathon.kkilook.screen.ROUTE_HOUSING_LIST
 import com.svkhackathon.kkilook.screen.ROUTE_ITEM_DETAIL
 import com.svkhackathon.kkilook.screen.ROUTE_MAIN
@@ -264,7 +266,11 @@ fun KkilookNavigation(
         }
 
         composable(ROUTE_HOUSING_LIST) {
-            HousingListScreen(onItemClick = {})
+            HousingListScreen(onItemClick = { navController.navigate(ROUTE_HOUSING_DETAIL) })
+        }
+
+        composable(ROUTE_HOUSING_DETAIL) {
+            HousingDetailScreen()
         }
     }
 }

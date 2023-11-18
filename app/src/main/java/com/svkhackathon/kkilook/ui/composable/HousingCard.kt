@@ -1,5 +1,6 @@
 package com.svkhackathon.kkilook.ui.composable
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -18,7 +19,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun HousingCard(modifier: Modifier = Modifier) {
+fun HousingCard(
+    modifier: Modifier = Modifier,
+    onCardClick: () -> Unit
+) {
     val housePictures = listOf<String>(
         "https://www.bankrate.com/2022/09/13091209/tips-for-selling-your-home.jpg?auto=webp&optimize=high&crop=16:9",
         "https://ap.rdcpix.com/6fec7821ca4c763b51ac15c764c5eef1l-b240479861od-w480_h360.jpg"
@@ -29,6 +33,7 @@ fun HousingCard(modifier: Modifier = Modifier) {
             .padding(12.dp)
             .shadow(10.dp)
             .clip(RoundedCornerShape(12.dp))
+            .clickable { onCardClick() }
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
             ImageSlider(imageList = housePictures, aspectRatio = 1.6f)

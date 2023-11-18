@@ -15,10 +15,11 @@ fun HousingListScreen(onItemClick: () -> Unit) {
     Column(
         Modifier.verticalScroll(rememberScrollState())
     ) {
-        HousingCard()
-        HousingCard()
-        HousingCard()
-        HousingCard()
+        HousingCard(onCardClick = onItemClick)
+        HousingCard(onCardClick = onItemClick)
+        HousingCard(onCardClick = onItemClick)
+        HousingCard(onCardClick = onItemClick)
+        HousingCard(onCardClick = onItemClick)
     }
 }
 
