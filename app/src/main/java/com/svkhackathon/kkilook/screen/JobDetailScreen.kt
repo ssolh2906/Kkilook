@@ -37,6 +37,8 @@ import androidx.compose.ui.unit.sp
 import com.svkhackathon.kkilook.R
 import com.svkhackathon.kkilook.ui.composable.Profile
 
+const val ROUTE_JOB_DETAIL = "route_job_detail"
+
 @Composable
 fun JobDetailScreen() {
     Column(
@@ -85,6 +87,7 @@ fun JobDetailScreen() {
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .padding(12.dp)
+                .padding(top = 12.dp)
         ) {
             Text(
                 text = "시급",
