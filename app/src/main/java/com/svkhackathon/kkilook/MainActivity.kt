@@ -60,7 +60,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             KkilookTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
@@ -80,6 +79,7 @@ private fun AppScreen() {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val currentPage = remember { mutableStateOf(Page.Market) }
+    var checked by remember { mutableStateOf(true) }
 
     Scaffold(
         topBar = {
@@ -100,8 +100,6 @@ private fun AppScreen() {
                         })
                 },
                 actions = {
-                    var checked by remember { mutableStateOf(true) }
-
                     Switch(
                         checked = checked,
                         onCheckedChange = { isMap ->
@@ -156,7 +154,11 @@ private fun AppScreen() {
                             label = { Text(text = Page.Job.string) },
                             selected = false,
                             onClick = {
-                                navController.navigate(ROUTE_MAIN)
+                                if (checked) {
+                                    navController.navigate(ROUTE_MAP)
+                                } else {
+                                    navController.navigate("$ROUTE_MAP/${Page.Job.name}")
+                                }
                                 currentPage.value = Page.Job
                                 scope.launch {
                                     drawerState.apply {
@@ -171,7 +173,11 @@ private fun AppScreen() {
                             label = { Text(text = Page.Housing.string) },
                             selected = false,
                             onClick = {
-                                navController.navigate(ROUTE_MAP)
+                                if (checked) {
+                                    navController.navigate(ROUTE_MAP)
+                                } else {
+                                    navController.navigate(ROUTE_HOUSING_LIST)
+                                }
                                 currentPage.value = Page.Housing
                                 scope.launch {
                                     drawerState.apply {
@@ -186,7 +192,11 @@ private fun AppScreen() {
                             label = { Text(text = Page.Market.string) },
                             selected = false,
                             onClick = {
-                                navController.navigate(ROUTE_MARKET_LIST)
+                                if (checked) {
+                                    navController.navigate(ROUTE_MAP)
+                                } else {
+                                    navController.navigate(ROUTE_MARKET_LIST)
+                                }
                                 currentPage.value = Page.Market
                                 scope.launch {
                                     drawerState.apply {
