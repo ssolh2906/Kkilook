@@ -3,6 +3,7 @@ package com.svkhackathon.kkilook.screen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
@@ -33,12 +34,13 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.svkhackathon.kkilook.Page
 import com.svkhackathon.kkilook.R
+import com.svkhackathon.kkilook.ui.theme.Brown10
 import java.lang.Math.random
 
 const val ROUTE_MAP = "route_map"
 
 @Composable
-fun MapScreen(page: String?) {
+fun MapScreen(page: String?, onPointerClick:()-> Unit) {
     val coordinate = remember { mutableStateOf<LayoutCoordinates?>(null) }
 
     val iconVector = when (page) {
@@ -66,7 +68,8 @@ fun MapScreen(page: String?) {
                     x = randomPositionX(coordinate = coordinate),
                     y = randomPositionY(coordinate = coordinate)
                 ),
-            iconVector = iconVector
+            iconVector = iconVector,
+            onClick = onPointerClick
         )
         Pointer(
             modifier = Modifier
@@ -75,7 +78,8 @@ fun MapScreen(page: String?) {
                     x = randomPositionX(coordinate = coordinate),
                     y = randomPositionY(coordinate = coordinate)
                 ),
-            iconVector = iconVector
+            iconVector = iconVector,
+            onClick = onPointerClick
         )
         Pointer(
             modifier = Modifier
@@ -84,7 +88,8 @@ fun MapScreen(page: String?) {
                     x = randomPositionX(coordinate = coordinate),
                     y = randomPositionY(coordinate = coordinate)
                 ),
-            iconVector = iconVector
+            iconVector = iconVector,
+            onClick = onPointerClick
         )
     }
 }
@@ -108,18 +113,19 @@ private fun randomPositionX(coordinate: MutableState<LayoutCoordinates?>): Dp {
 }
 
 @Composable
-fun Pointer(modifier: Modifier, iconVector: ImageVector?) {
+fun Pointer(modifier: Modifier, iconVector: ImageVector?, onClick: () -> Unit) {
     Box(
         modifier = modifier
+            .clickable { onClick() }
             .shadow(10.dp, clip = false)
             .background(color = Color.White, shape = RoundedCornerShape(12.dp))
-            .border(2.dp, Color.Blue, shape = RoundedCornerShape(12.dp))
+            .border(2.dp, Brown10, shape = RoundedCornerShape(12.dp))
             .padding(12.dp)
     ) {
         Icon(
             imageVector = iconVector ?: Icons.Default.Email,
             contentDescription = "Pointer on map",
-            tint = Color.Blue,
+            tint = Brown10,
             modifier = Modifier.fillMaxSize()
         )
     }
@@ -128,5 +134,5 @@ fun Pointer(modifier: Modifier, iconVector: ImageVector?) {
 @Composable
 @Preview
 fun PreviewMapScreen() {
-    MapScreen("")
+    MapScreen(page = "", onPointerClick = {})
 }

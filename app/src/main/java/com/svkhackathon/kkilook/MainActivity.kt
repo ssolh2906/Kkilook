@@ -274,15 +274,33 @@ fun KkilookNavigation(
         }
 
         composable("$ROUTE_MAP/{page}") { navEntry ->
+
+
             MapScreen(
-                page = navEntry.arguments?.getString("page")
+                page = navEntry.arguments?.getString("page"),
+                onPointerClick = {
+                    val destination = when(currentPage.value) {
+                        Page.Job -> ROUTE_JOB_LIST
+                        Page.Housing -> ROUTE_HOUSING_LIST
+                        Page.Market -> ROUTE_MARKET_LIST
+                    }
+                    navController.navigate(destination)
+                }
             )
         }
 
 
         composable(ROUTE_MAP) { navEntry ->
             MapScreen(
-                page = currentPage.value.name
+                page = currentPage.value.name,
+                onPointerClick = {
+                    val destination = when(currentPage.value) {
+                        Page.Job -> ROUTE_JOB_LIST
+                        Page.Housing -> ROUTE_HOUSING_LIST
+                        Page.Market -> ROUTE_MARKET_LIST
+                    }
+                    navController.navigate(destination)
+                }
             )
         }
 
