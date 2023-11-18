@@ -10,7 +10,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -24,17 +27,41 @@ import androidx.compose.ui.unit.sp
 fun CommentBox() {
     Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Comment(
-            user = "웅이",
-            userProfileUrl = "https://staticg.sportskeeda.com/editor/2021/01/94117-16113018527605-800.jpg",
+            user = "지우",
+            userProfileUrl = "https://i.pinimg.com/736x/18/d9/e1/18d9e1307018dbc76750ca7d5124fccd.jpg",
             comment = "살려줘"
         )
+
         Comment(
-            user = "지우",
+            user = "웅이",
             userProfileUrl = "https://staticg.sportskeeda.com/editor/2021/01/94117-16113018527605-800.jpg",
             comment = "어림도없다 요녀석",
             isReply = true
         )
+        Comment(
+            user = "사토시",
+            userProfileUrl = "https://i.pinimg.com/736x/18/d9/e1/18d9e1307018dbc76750ca7d5124fccd.jpg",
+            comment = "저녀석은 가짜에요"
+        )
+
+        CommentInput()
+
     }
+}
+
+@Composable
+fun CommentInput() {
+    val text = remember {
+        mutableStateOf("")
+    }
+    TextField(
+        value = text.value,
+        onValueChange = {
+            text.value = it
+        },
+        placeholder = {
+            "댓글을 입력해주세요"
+        })
 }
 
 @Composable
