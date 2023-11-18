@@ -97,7 +97,33 @@ private fun AppScreen() {
                         )
                         Divider()
                         NavigationDrawerItem(
-                            label = { Text(text = "Drawer Item") },
+                            label = { Text(text = "팝니다 / 삽니다") },
+                            selected = false,
+                            onClick = {
+                                navController.navigate(ROUTE_MAIN)
+                                scope.launch {
+                                    drawerState.apply {
+                                        close()
+                                    }
+                                }
+                            }
+                        )
+
+                        NavigationDrawerItem(
+                            label = { Text(text = "메에?") },
+                            selected = false,
+                            onClick = {
+                                navController.navigate(ROUTE_MAIN)
+                                scope.launch {
+                                    drawerState.apply {
+                                        close()
+                                    }
+                                }
+                            }
+                        )
+
+                        NavigationDrawerItem(
+                            label = { Text(text = "끼룩끼룩") },
                             selected = false,
                             onClick = {
                                 navController.navigate(ROUTE_MAIN)
