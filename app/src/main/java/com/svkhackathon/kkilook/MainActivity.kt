@@ -3,6 +3,7 @@ package com.svkhackathon.kkilook
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,7 +22,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.material3.NavigationDrawerItem
+import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
@@ -36,6 +39,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -58,6 +62,9 @@ import com.svkhackathon.kkilook.screen.ROUTE_JOB_LIST
 import com.svkhackathon.kkilook.screen.ROUTE_MAIN
 import com.svkhackathon.kkilook.screen.ROUTE_MAP
 import com.svkhackathon.kkilook.screen.ROUTE_MARKET_LIST
+import com.svkhackathon.kkilook.ui.theme.Brown40
+import com.svkhackathon.kkilook.ui.theme.Brown60
+import com.svkhackathon.kkilook.ui.theme.Brown80
 import com.svkhackathon.kkilook.ui.theme.KkilookTheme
 import kotlinx.coroutines.launch
 
@@ -86,6 +93,10 @@ private fun AppScreen() {
     val scope = rememberCoroutineScope()
     val currentPage = remember { mutableStateOf(Page.Market) }
     var checked by remember { mutableStateOf(true) }
+
+    val drawerColors = NavigationDrawerItemDefaults.colors(
+        unselectedContainerColor = Brown60,
+    )
 
     Scaffold(
         topBar = {
@@ -144,11 +155,11 @@ private fun AppScreen() {
             )
         }
     ) {
-        Surface(modifier = Modifier.padding(it)) {
+        Surface(modifier = Modifier.padding(it), color = Brown80) {
             ModalNavigationDrawer(
                 drawerState = drawerState,
                 drawerContent = {
-                    ModalDrawerSheet {
+                    ModalDrawerSheet(drawerContainerColor = Brown80) {
                         Text(
                             text = "Menu",
                             fontWeight = FontWeight.Bold,
@@ -171,7 +182,8 @@ private fun AppScreen() {
                                         close()
                                     }
                                 }
-                            }
+                            },
+                            colors = drawerColors
                         )
 
                         NavigationDrawerItem(
@@ -190,7 +202,8 @@ private fun AppScreen() {
                                         close()
                                     }
                                 }
-                            }
+                            },
+                            colors = drawerColors
                         )
 
                         NavigationDrawerItem(
@@ -209,11 +222,12 @@ private fun AppScreen() {
                                         close()
                                     }
                                 }
-                            }
+                            },
+                            colors = drawerColors
                         )
                         // ...other drawer items
                     }
-                }
+                },
             ) {
                 KkilookNavigation(navController = navController, "Hello Kkilook!", it, currentPage)
             }
