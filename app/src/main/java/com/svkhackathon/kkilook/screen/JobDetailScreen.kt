@@ -21,6 +21,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -35,7 +37,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.svkhackathon.kkilook.R
+import com.svkhackathon.kkilook.ui.composable.CommentBox
 import com.svkhackathon.kkilook.ui.composable.Profile
+import com.svkhackathon.kkilook.ui.theme.Brown10
 
 const val ROUTE_JOB_DETAIL = "route_job_detail"
 
@@ -76,7 +80,10 @@ fun JobDetailScreen() {
 
         }
 
-        Button(onClick = {}, modifier = Modifier.fillMaxWidth(0.8f)) {
+        Button(onClick = {}, modifier = Modifier.fillMaxWidth(0.8f),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Brown10,
+            )) {
             Text(text = "지원하기")
         }
 
@@ -123,6 +130,8 @@ fun JobDetailScreen() {
 
         }
 
+        Divider()
+
         Profile()
 
         Condition()
@@ -152,6 +161,8 @@ fun JobDetailScreen() {
             )
 
         }
+
+        CommentBox()
     }
 }
 

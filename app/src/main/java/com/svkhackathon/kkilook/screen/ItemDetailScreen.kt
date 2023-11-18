@@ -34,6 +34,7 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.svkhackathon.kkilook.R
+import com.svkhackathon.kkilook.ui.composable.CommentBox
 import com.svkhackathon.kkilook.ui.composable.ImageSlider
 import com.svkhackathon.kkilook.ui.composable.Profile
 
@@ -95,6 +96,8 @@ fun ItemDetailScreen(
             )
 
         }
+
+        CommentBox()
     }
 }
 
