@@ -26,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.svkhackathon.kkilook.R
+import com.svkhackathon.kkilook.ui.composable.CommentBox
 import com.svkhackathon.kkilook.ui.composable.ImageSlider
 import com.svkhackathon.kkilook.ui.composable.Profile
 
@@ -54,7 +55,9 @@ fun HousingDetailScreen() {
         Text(
             text = "$300 / night",
             style = TextStyle.Default.copy(fontSize = 20.sp, fontWeight = FontWeight.Bold, textAlign = TextAlign.End),
-            modifier = Modifier.padding(12.dp).fillMaxWidth()
+            modifier = Modifier
+                .padding(12.dp)
+                .fillMaxWidth()
         )
 
         Profile()
@@ -89,8 +92,8 @@ fun HousingDetailScreen() {
                 contentDescription = "map",
                 modifier = Modifier.fillMaxSize()
             )
-
         }
+        CommentBox()
     }
 }
 
