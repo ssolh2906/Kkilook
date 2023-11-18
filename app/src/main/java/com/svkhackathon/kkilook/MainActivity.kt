@@ -45,12 +45,14 @@ import androidx.navigation.compose.rememberNavController
 import com.svkhackathon.kkilook.screen.HousingDetailScreen
 import com.svkhackathon.kkilook.screen.HousingListScreen
 import com.svkhackathon.kkilook.screen.ItemDetailScreen
+import com.svkhackathon.kkilook.screen.JobListScreen
 import com.svkhackathon.kkilook.screen.MainScreen
 import com.svkhackathon.kkilook.screen.MapScreen
 import com.svkhackathon.kkilook.screen.MarketListScreen
 import com.svkhackathon.kkilook.screen.ROUTE_HOUSING_DETAIL
 import com.svkhackathon.kkilook.screen.ROUTE_HOUSING_LIST
 import com.svkhackathon.kkilook.screen.ROUTE_ITEM_DETAIL
+import com.svkhackathon.kkilook.screen.ROUTE_JOB_LIST
 import com.svkhackathon.kkilook.screen.ROUTE_MAIN
 import com.svkhackathon.kkilook.screen.ROUTE_MAP
 import com.svkhackathon.kkilook.screen.ROUTE_MARKET_LIST
@@ -111,7 +113,7 @@ private fun AppScreen() {
                                 navController.navigate(ROUTE_MAP)
                             } else {
                                 when (currentPage.value) {
-                                    Page.Job -> navController.navigate(ROUTE_MAIN)
+                                    Page.Job -> navController.navigate(ROUTE_JOB_LIST)
                                     Page.Housing -> navController.navigate(ROUTE_HOUSING_LIST)
                                     Page.Market -> navController.navigate(ROUTE_MARKET_LIST)
                                 }
@@ -157,9 +159,9 @@ private fun AppScreen() {
                             selected = false,
                             onClick = {
                                 if (checked) {
-                                    navController.navigate(ROUTE_MAP)
-                                } else {
                                     navController.navigate("$ROUTE_MAP/${Page.Job.name}")
+                                } else {
+                                    navController.navigate(ROUTE_JOB_LIST)
                                 }
                                 currentPage.value = Page.Job
                                 scope.launch {
@@ -271,6 +273,10 @@ fun KkilookNavigation(
 
         composable(ROUTE_HOUSING_DETAIL) {
             HousingDetailScreen()
+        }
+
+        composable(ROUTE_JOB_LIST) {
+            JobListScreen(onItemClick = {})
         }
     }
 }

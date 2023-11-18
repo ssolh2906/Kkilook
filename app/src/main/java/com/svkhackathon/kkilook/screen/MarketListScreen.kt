@@ -52,7 +52,7 @@ fun MarketListScreen(onItemClick: () -> Unit) {
         item, item, item, item, item
     )
     Column {
-        MarketTopBar(currFilter = filter.value, onFilterClick = {openDialog.value = true})
+        SubTopBar(currFilter = filter.value, onFilterClick = {openDialog.value = true})
 
         LazyColumn {
             items(merchantList.size) {
@@ -63,7 +63,7 @@ fun MarketListScreen(onItemClick: () -> Unit) {
 }
 
 @Composable
-fun MarketTopBar(currFilter:String, onFilterClick: ()-> Unit) {
+fun SubTopBar(currFilter:String, onFilterClick: ()-> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()

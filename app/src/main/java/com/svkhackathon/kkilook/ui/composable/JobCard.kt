@@ -57,7 +57,7 @@ fun JobCard(
                 }
                 Text(text = "세금보고 가능 / 탄력적인 스케쥴 / 고무장갑 지참", style = TextStyle.Default.copy(color = Color.Gray))
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(text = "$5 / Hr", style = TextStyle.Default.copy(fontWeight = FontWeight.Bold, fontSize = 20.sp))
+                Text(text = "$ 5 / Hr", style = TextStyle.Default.copy(fontWeight = FontWeight.Bold, fontSize = 20.sp))
             }
             Spacer(modifier = Modifier.size(12.dp))
             Icon(
