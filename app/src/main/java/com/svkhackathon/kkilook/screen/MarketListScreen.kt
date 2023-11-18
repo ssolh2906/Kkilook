@@ -7,7 +7,7 @@ import com.svkhackathon.kkilook.ui.composable.MarketItem
 const val ROUTE_MARKET_LIST = "route_market_list"
 
 @Composable
-fun MarketListScreen() {
+fun MarketListScreen(onItemClick: () -> Unit) {
     val item = MarketItemState(
         "메타몽",
         "San jose, 10 mi",
@@ -20,7 +20,7 @@ fun MarketListScreen() {
 
     LazyColumn {
         items(merchantList.size) {
-            MarketItem()
+            MarketItem(onItemClick = onItemClick)
         }
     }
 }

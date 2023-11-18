@@ -1,5 +1,6 @@
 package com.svkhackathon.kkilook.ui.composable
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,13 +26,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun MarketItem() {
+fun MarketItem(onItemClick: () -> Unit) {
 
     Box(
         modifier = Modifier
             .wrapContentHeight()
             .fillMaxWidth()
             .padding(12.dp)
+            .clickable { onItemClick() }
     ) {
         Row {
             ImageByUrl(
@@ -66,9 +68,11 @@ fun MarketItem() {
                         fontSize = 22.sp
                     )
                 )
-                Box(modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                ) {
                     Row(modifier = Modifier.align(Alignment.BottomEnd)) {
                         Icon(
                             Icons.Outlined.FavoriteBorder,
@@ -87,5 +91,5 @@ fun MarketItem() {
 @Preview
 @Composable
 fun PreviewMarketItems() {
-    MarketItem()
+    MarketItem(onItemClick = {})
 }

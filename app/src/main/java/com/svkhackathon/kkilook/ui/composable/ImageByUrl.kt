@@ -2,6 +2,7 @@ package com.svkhackathon.kkilook.ui.composable
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
@@ -20,6 +21,7 @@ fun ImageByUrl(
             .crossfade(true)
             .build(),
         modifier = modifier,
+        contentScale = ContentScale.Crop,
         contentDescription = contentDescription,
     )
 }
