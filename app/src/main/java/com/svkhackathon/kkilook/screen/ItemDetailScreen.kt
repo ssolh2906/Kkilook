@@ -39,7 +39,6 @@ import com.svkhackathon.kkilook.ui.composable.Profile
 
 const val ROUTE_ITEM_DETAIL = "route_item_detail"
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ItemDetailScreen(
     id: String?

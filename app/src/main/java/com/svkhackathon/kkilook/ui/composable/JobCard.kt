@@ -31,14 +31,12 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun JobCard(
     modifier: Modifier = Modifier,
-    onCardClick: () -> Unit
 ) {
     Surface(
         modifier = modifier
             .padding(12.dp)
             .shadow(10.dp)
             .clip(RoundedCornerShape(12.dp))
-            .clickable { onCardClick() }
     ) {
         Row(modifier = Modifier.padding(12.dp)) {
             Column(modifier.weight(1f)) {
@@ -73,5 +71,5 @@ fun JobCard(
 @Preview
 @Composable
 fun PreviewJobCard() {
-    JobCard {}
+    JobCard()
 }
