@@ -25,8 +25,7 @@ import com.svkhackathon.kkilook.R
 const val ROUTE_MAP = "route_map"
 
 @Composable
-fun MapScreen(
-) {
+fun MapScreen(page: String?) {
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
             painter = painterResource(id = R.drawable.map),
@@ -72,5 +71,5 @@ fun Pointer(modifier: Modifier) {
 @Composable
 @Preview
 fun PreviewMapScreen() {
-    MapScreen()
+    MapScreen("")
 }

@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Menu
@@ -28,6 +29,7 @@ import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -148,6 +150,7 @@ private fun AppScreen() {
                         )
                         Divider()
                         NavigationDrawerItem(
+                            icon = { Icon(Icons.Filled.KeyboardArrowRight, null) },
                             label = { Text(text = Page.Job.string) },
                             selected = false,
                             onClick = {
@@ -162,6 +165,7 @@ private fun AppScreen() {
                         )
 
                         NavigationDrawerItem(
+                            icon = { Icon(Icons.Filled.KeyboardArrowRight, null) },
                             label = { Text(text = Page.Housing.string) },
                             selected = false,
                             onClick = {
@@ -176,6 +180,7 @@ private fun AppScreen() {
                         )
 
                         NavigationDrawerItem(
+                            icon = { Icon(Icons.Filled.KeyboardArrowRight, null) },
                             label = { Text(text = Page.Market.string) },
                             selected = false,
                             onClick = {
@@ -192,7 +197,7 @@ private fun AppScreen() {
                     }
                 }
             ) {
-                KkilookNavigation(navController = navController, "Hello Kkilook!", it)
+                KkilookNavigation(navController = navController, "Hello Kkilook!", it, currentPage)
             }
         }
     }
@@ -202,10 +207,11 @@ private fun AppScreen() {
 fun KkilookNavigation(
     navController: NavHostController,
     name: String,
-    paddingValues: PaddingValues
+    paddingValues: PaddingValues,
+    currentPage: MutableState<Page>
 ) {
 
-    NavHost(navController = navController, startDestination = ROUTE_MAIN) {
+    NavHost(navController = navController, startDestination = "$ROUTE_MAP") {
         composable(ROUTE_MAIN) {
             MainScreen(
                 name = name,
@@ -226,8 +232,17 @@ fun KkilookNavigation(
             ItemDetailScreen("")
         }
 
-        composable("$ROUTE_MAP") {
-            MapScreen()
+        composable("$ROUTE_MAP/{page}") {navEntry ->
+            MapScreen(
+                page = navEntry.arguments?.getString("page")
+            )
+        }
+
+
+        composable(ROUTE_MAP) { navEntry ->
+            MapScreen(
+                page = currentPage.value.name
+            )
         }
 
         composable(ROUTE_MARKET_LIST) {
