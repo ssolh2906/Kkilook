@@ -42,10 +42,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.svkhackathon.kkilook.screen.HousingListScreen
 import com.svkhackathon.kkilook.screen.ItemDetailScreen
 import com.svkhackathon.kkilook.screen.MainScreen
 import com.svkhackathon.kkilook.screen.MapScreen
 import com.svkhackathon.kkilook.screen.MarketListScreen
+import com.svkhackathon.kkilook.screen.ROUTE_HOUSING_LIST
 import com.svkhackathon.kkilook.screen.ROUTE_ITEM_DETAIL
 import com.svkhackathon.kkilook.screen.ROUTE_MAIN
 import com.svkhackathon.kkilook.screen.ROUTE_MAP
@@ -110,7 +112,7 @@ private fun AppScreen() {
                             } else {
                                 when (currentPage.value) {
                                     Page.Job -> navController.navigate(ROUTE_MAIN)
-                                    Page.Housing -> navController.navigate(ROUTE_MAIN)
+                                    Page.Housing -> navController.navigate(ROUTE_HOUSING_LIST)
                                     Page.Market -> navController.navigate(ROUTE_MARKET_LIST)
                                 }
                             }
@@ -169,7 +171,7 @@ private fun AppScreen() {
                             label = { Text(text = Page.Housing.string) },
                             selected = false,
                             onClick = {
-                                navController.navigate(ROUTE_MAIN)
+                                navController.navigate(ROUTE_MAP)
                                 currentPage.value = Page.Housing
                                 scope.launch {
                                     drawerState.apply {
@@ -232,7 +234,7 @@ fun KkilookNavigation(
             ItemDetailScreen("")
         }
 
-        composable("$ROUTE_MAP/{page}") {navEntry ->
+        composable("$ROUTE_MAP/{page}") { navEntry ->
             MapScreen(
                 page = navEntry.arguments?.getString("page")
             )
@@ -249,6 +251,10 @@ fun KkilookNavigation(
             MarketListScreen {
                 navController.navigate(ROUTE_ITEM_DETAIL)
             }
+        }
+
+        composable(ROUTE_HOUSING_LIST) {
+            HousingListScreen(onItemClick = {})
         }
     }
 }

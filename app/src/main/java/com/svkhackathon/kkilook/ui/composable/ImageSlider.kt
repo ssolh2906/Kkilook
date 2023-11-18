@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ImageSlider(imageList: List<String>) {
+fun ImageSlider(imageList: List<String>, aspectRatio: Float = 1f) {
     val pagerState = rememberPagerState(pageCount = {
         imageList.size
     })
@@ -22,7 +22,7 @@ fun ImageSlider(imageList: List<String>) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth(1f)
-                    .aspectRatio(1f),
+                    .aspectRatio(aspectRatio),
             ) {
                 ImageByUrl(
                     url = imageList[page],
