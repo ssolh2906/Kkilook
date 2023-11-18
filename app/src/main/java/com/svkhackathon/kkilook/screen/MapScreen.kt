@@ -13,8 +13,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -56,6 +59,7 @@ fun MapScreen(
 fun Pointer(modifier: Modifier) {
     Box(
         modifier = modifier
+            .shadow(10.dp, clip = false)
             .background(color = Color.White, shape = RoundedCornerShape(12.dp))
             .border(2.dp, Color.Blue, shape = RoundedCornerShape(12.dp))
             .padding(12.dp)
